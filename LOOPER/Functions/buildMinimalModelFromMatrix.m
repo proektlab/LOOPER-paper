@@ -170,7 +170,7 @@ for i = 1:size(transitionToMatrix,1)
         totalLength = pathLength + graphTree(possibleEnds(j), loopStart);
         totalLength = totalLength ./ sqrt(length(path));
         
-        DISPLAY=1;
+        DISPLAY=0;
         if DISPLAY && i == 1
             figure(7);
             clf;
@@ -559,8 +559,10 @@ function [UIData] = drawLoops(app, makeButtons, isSelected, seed, maxClusters, l
                     continue;
                 end
                 
+                noiseEstimate = std(clusterMeansPCA(:));
+                
                 drawPath = [allLoops{loopID} allLoops{loopID}(1)];
-                pathNoise = normrnd(0, 0.2, [length(drawPath), size(clusterMeansPCA(1,:),2)]);
+                pathNoise = normrnd(0, noiseEstimate/100, [length(drawPath), size(clusterMeansPCA(1,:),2)]);
                 pathNoise(end,:) = pathNoise(1,:);
                 points = [];
                 for j = 1:length(drawPath)-1
