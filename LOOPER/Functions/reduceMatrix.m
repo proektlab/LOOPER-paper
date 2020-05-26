@@ -341,7 +341,7 @@ for i = 1:max(clusterIDs)
     figure(i);
     clf;
     hold on;
-    if exist('DEBUG', 'var') && DEBUG
+    if DEBUG
         thisTrace = finalDynamicsStream * pcaBasis;
         plot3(thisTrace(:,1), thisTrace(:,2), thisTrace(:,3));
         scatter3(thisTrace(thisIndices,1), thisTrace(thisIndices,2), thisTrace(thisIndices,3));
